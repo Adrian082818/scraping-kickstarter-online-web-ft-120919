@@ -4,17 +4,17 @@ require 'pry'
 
 def create_project_hash
   html = File.read('fixtures/kickstarter.html')
-  projects = kickstarter.css("li.project.grid_4")
+  # projects = kickstarter.css("li.project.grid_4")
   #project.css("h2.bbcard_name strong a").text 
   #project.css("div.project-thumbnail").attribute("src").value
   #project.css("p.bbcard_blurb").text 
   #project.css("ul.project-meta span.location-name").text 
   #project.css("ul.project-stats li.first.funded strong").text.gsub("%","").to_i 
   kickstarter = Nokogiri::HTML(html)
-  results = {}
+  projects = {}
   projects.each do |project|
     title = project.css("h2.bbcard_name strong a").text
-    results[title.to_sm] = {
+    projects[title.to_sm] = {
       :image_link => project.css("div.project-thumbnail").attribute("src").value,
       :description => project.css("p.bbcard_blurb").text,
       :location => project.css("ul.project-meta span.location-name").text,
@@ -22,6 +22,6 @@ def create_project_hash
       
     }
   end 
-  results
+  projects
 end
 create_project_hash
