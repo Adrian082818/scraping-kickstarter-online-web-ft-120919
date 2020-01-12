@@ -14,7 +14,7 @@ def create_project_hash
   results = {}
   projects.each do |project|
     title = project.css("h2.bbcard_name strong a").text
-    projects[title.to_sm] = {
+    results[title.to_sm] = {
       :image_link => project.css("div.project-thumbnail").attribute("src").value,
       :description => project.css("p.bbcard_blurb").text,
       :location => project.css("ul.project-meta span.location-name").text,
